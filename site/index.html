@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta  charset="UTF-8"> 
+<title>Flexibus Articulados</title>
+<link rel="stylesheet" href="assets/sources/slideshow.css">
+<style>
+
+
+  @font-face {
+    font-family: 'flexFont';
+    src:  url('assets/fonts/Questrial-Regular.ttf') format('woff');
+  }
+
+
+  :root {
+    --cor1: #CBE86B;
+    --cor2: #FFFFFF;
+    --cor3: #5f4733;
+    --cor4: #1C140D;
+    --cor5: #FFFFFF;
+    --transp: 0.8;
+  }
+
+  * {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+    font-family: 'flexFont', Fallback, sans-serif;
+  }
+
+  .top{
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+  }
+
+  .board{
+    background-color: white;
+    z-index: 1;
+  }
+
+
+  .scr-main{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: scroll;
+    padding-top: -20px;
+    box-sizing: border-box;
+  }
+
+  .scr-child{
+    width: 100%;
+    min-height: 800px;
+/*    margin: 10px;*/
+    padding: 10px;
+    /*border: solid 1px black;*/
+  }
+
+  
+  #ch_01{
+    background-image: url('assets/images/f4.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  #ch_03{
+    background-image: url('assets/images/elev03.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+
+
+</style>
+</head>
+<body>
+
+  <div class="top">
+    <img src="assets/images/logo.png" alt="">
+  </div>
+
+  <div class="scr-main">
+    <div id="ch_01" class="scr-child">
+    </div>
+    <div id="ch_02" class="scr-child board">
+      <h1>Flexibus Sanfonados LTDA.</h1>
+      <p>Empresa 100% nacional, fundada em 1994 pelo sr. Jacy Dantas a fim de iniciar um processo de manutenção até então inédito no mercado nacional, atendendo uma necessidade cada vez maior das empresas de ônibus auxiliando-as  na manutenção dos seus carros articulados.</p>
+      <h2>Nossa Política</h2>
+      <p>Resolver todo problema de nosso cliente relacionado a toda parte de articulação e sanfonados, no menor tempo possível, com a melhor qualidade e praticando um preço justo</p>
+
+    </div>
+    <div id="ch_03" class="scr-child">
+      <h1>Articulação</h1>
+    </div>
+    <div id="ch_04" class="scr-child">
+      <h1>Fole do Finger de Embarque</h1>
+    </div>
+    <div id="ch_05" class="scr-child">
+      <h1>Gangways de Metrô e Trens</h1>
+    </div>
+    <div id="ch_06" class="scr-child">
+      <h1>Projetos Especiais</h1>
+    </div>
+    <div id="ch_07" class="scr-child">
+      <h1>Peças</h1>
+    </div>
+    <div id="ch_08" class="scr-child">
+      <h1>Tintas</h1>
+    </div>
+    <div id="ch_09" class="scr-child">
+      <h1>Contato</h1>
+    </div>
+    <div id="ch_10" class="scr-child">
+      <h1>Fale Conosco</h1>
+    </div>
+
+
+
+  </div>
+
+
+
+<script src="assets/sources/slideshow.js"></script>
+<script>
+
+
+
+</script>
+
+</body>
+</html>
+
+

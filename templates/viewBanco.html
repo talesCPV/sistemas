@@ -1,0 +1,159 @@
+
+<template>
+    <style>
+
+        .frm{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inline label{
+            width:  120px;
+        }
+
+        .inline select{
+            width: 100%;
+            padding: 10px;
+            margin: 10px;
+        }
+
+
+    </style>
+  
+    <fieldset class="frm">
+        <legend>Banco de Dados</legend>
+        <div class="inline">
+            <label for="cmbSis">Sistema</label>
+            <select id="cmbSis"></select>
+        </div>
+        <div class="inline">
+            <label for="cmbCli">Cliente</label>
+            <select id="cmbCli"></select>
+        </div>
+        <div class="inline">
+            <label for="edtDb_nome">Banco:</label>
+            <input type="text" id="edtDb_nome">
+        </div>
+        <div class="inline">
+            <label for="edtDb_host">HOST:</label>
+            <input type="text" id="edtDb_host">
+        </div>
+        <div class="inline">
+            <label for="edtDb_user">Usuário:</label>
+            <input type="text" id="edtDb_user">
+        </div>
+        <div class="inline">
+            <label for="edtDb_pass">Senha:</label>
+            <input type="password" id="edtDb_pass">
+        </div>
+
+
+
+        <button id="btnSave">Salvar</button>
+        <button id="btnDel">Deletar</button>
+    </fieldset>
+
+</template>
+<script>
+
+    function fetch_crip(cod,str){
+        const data = new URLSearchParams();
+        data.append('std', cod);
+        data.append('str',str);
+
+        const myRequest = new Request("backend/crip.php",{
+            method : "POST",
+            body : data
+        });
+
+        return new Promise((resolve,reject) =>{
+            fetch(myRequest)
+            .then(function (response){
+                if (response.status === 200) { 
+                    resolve(response.text());                    
+                } else { 
+                    reject(new Error("Houve algum erro na comunicação com o servidor"));                    
+                } 
+            });
+        });  
+    }
+
+    function read(str,obj){
+        fetch_crip(0,str)
+        .then((txt)=>{
+            obj.value = txt
+        });        
+    }
+
+
+    const params_cli = new Object;
+        params_cli.field = 'nome'
+        params_cli.signal = 'LIKE'
+        params_cli.value = '"%%"'        
+    fillCombo('cmbCli',params_cli,2,['id','fantasia'], main_data.viewBanco.data.mode == 'edit' ? main_data.viewBanco.data.id_cliente :'' )
+
+    const params_sis = new Object
+    params_sis.hash = localStorage.getItem('hash')
+    fillCombo('cmbSis',params_sis,7,['id','nome'], main_data.viewBanco.data.mode == 'edit' ? main_data.viewBanco.data.id_sistema :'' )
+
+    if(main_data.viewBanco.data.mode == 'edit' ){
+        main_data.viewBanco.data.db_nome == 'null' ? 0 : read(main_data.viewBanco.data.db_nome,document.querySelector('#edtDb_nome'))        
+        main_data.viewBanco.data.db_host == 'null' ? 0 : read(main_data.viewBanco.data.db_host,document.querySelector('#edtDb_host'))
+        main_data.viewBanco.data.db_pass == 'null' ? 0 : read(main_data.viewBanco.data.db_user,document.querySelector('#edtDb_user'))
+        main_data.viewBanco.data.db_user == 'null' ? 0 : read(main_data.viewBanco.data.db_pass,document.querySelector('#edtDb_pass'))
+    }else{
+        document.querySelector('#btnDel').style.display = 'none'
+    }
+
+
+    document.querySelector('#btnSave').addEventListener('click',()=>{
+        if(checkField(['cmbSis','cmbCli'])){
+            
+            const params = new Object;
+                params.id_sistema = document.querySelector('#cmbSis').value
+                params.id_cliente = document.querySelector('#cmbCli').value
+
+            fetch_crip(1,document.querySelector('#edtDb_nome').value.trim())
+            .then((db_nome)=>{
+                fetch_crip(1,document.querySelector('#edtDb_host').value.trim())
+                .then((db_host)=>{
+                    fetch_crip(1,document.querySelector('#edtDb_user').value.trim())
+                    .then((db_user)=>{
+                        fetch_crip(1,document.querySelector('#edtDb_pass').value.trim())
+                        .then((db_pass)=>{
+                            params.db_nome = db_nome
+                            params.db_host = db_host
+                            params.db_user = db_user
+                            params.db_pass = db_pass                    
+                            const myPromisse = queryDB(params,11);
+                            myPromisse.then((resolve)=>{
+                                main_data.bancodados.fillDb()
+                                closeModal('viewBanco')
+                            })
+
+                        })
+                    })
+                })
+            })
+        }   
+             
+    })
+
+    document.querySelector('#btnDel').addEventListener('click',()=>{
+
+        if (confirm('Deseja realmente deletar esta base de dados?')) {
+            const params = new Object;
+                params.id = main_data.viewSistema.data.id
+                params.hash = localStorage.getItem('hash')
+
+            const myPromisse = queryDB(params,12);
+
+            myPromisse.then((resolve)=>{
+                main_data.bancodados.fillDb()
+                closeModal('viewBanco')
+            })
+        }
+    })
+
+
+</script>

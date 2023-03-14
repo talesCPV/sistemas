@@ -1,0 +1,89 @@
+
+<template>
+    <style>
+
+        .frm{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inline label{
+            width:  120px;
+        }
+
+        .inline select{
+            width: 100%;
+            padding: 10px;
+            margin: 10px;
+        }
+
+
+    </style>
+  
+    <fieldset class="frm">
+        <legend>Sistema</legend>
+        <div class="inline">
+            <label for="edtNome">Nome:*</label>
+            <input type="text" id="edtNome" placeholder="Nome" maxlength="50">
+        </div>
+        <div class="inline">
+            <label for="edtUrl">URL:</label>
+            <input type="text" id="edtUrl" placeholder="URL"  maxlength="255">
+        </div>
+        <div class="inline">
+            <label for="edtDescri">Descrição:</label>
+            <textarea id="edtDescri" cols="30" rows="10" maxlength="255"></textarea>
+        </div>
+        <button id="btnSave">Salvar</button>
+        <button id="btnDel">Deletar</button>
+    </fieldset>
+
+</template>
+<script>
+
+    if(main_data.viewSistema.data.mode == 'edit' ){
+        document.querySelector('#edtNome').value = main_data.viewSistema.data.nome == 'null' ? ' ' : main_data.viewSistema.data.nome
+        document.querySelector('#edtUrl').value = main_data.viewSistema.data.url == 'null' ? ' ' : main_data.viewSistema.data.url
+        document.querySelector('#edtDescri').value = main_data.viewSistema.data.descri == 'null' ? ' ' : main_data.viewSistema.data.descri
+        document.querySelector('#btnDel').style.display = main_data.viewSistema.data.mode == 'user' ? 'none' : 'block'
+        main_data.viewSistema.data.hash = main_data.viewSistema.data.mode == 'user' ? localStorage.getItem('hash') : main_data.viewSistema.data.hash
+    }else{
+        document.querySelector('#btnDel').style.display = 'none'
+    }
+
+    document.querySelector('#btnSave').addEventListener('click',()=>{
+        if(checkField(['edtNome'])){
+            
+            const params = new Object;
+                params.id = main_data.viewSistema.data.mode == 'new' ? 'DEFAULT' : main_data.viewSistema.data.id
+                params.nome = document.querySelector('#edtNome').value.trim()
+                params.descri = document.querySelector('#edtDescri').value.trim()
+                params.url = document.querySelector('#edtUrl').value.trim()
+
+                const myPromisse = queryDB(params,8);
+                    myPromisse.then((resolve)=>{
+                        main_data.sistemas.fillSis()
+                        closeModal('viewSistema')
+                    })
+        }   
+             
+    })
+
+    document.querySelector('#btnDel').addEventListener('click',()=>{
+
+        if (confirm('Deseja realmente deletar este sistema?')) {
+            const params = new Object;
+                params.id = main_data.viewSistema.data.id
+                params.hash = localStorage.getItem('hash')
+
+            const myPromisse = queryDB(params,9);
+
+            myPromisse.then((resolve)=>{
+                main_data.sistemas.fillSis()
+                closeModal('viewSistema')
+            })
+        }
+    })
+
+
+</script>

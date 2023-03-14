@@ -1,0 +1,87 @@
+
+<template>
+    <style>
+        #btnRelat{
+            display: none;
+        }
+
+    </style>
+
+    <div class="form-base">
+        <h1>Acesso dos Clientes</h1>
+
+        <fieldset>
+            <legend>Busca</legend>
+            <div class="inline">
+                <label for="cmbSis">Sistema</label>
+                <select id="cmbSis"></select>
+                <label for="cmbCli">Cliente</label>
+                <select id="cmbCli"></select>
+                <button id="btnBusca">Busca</button>
+                <button id="btnNovo" class="btnAdd" >+</button>
+            </div>
+            <table id="tblUser"></table>
+        </fieldset>
+    
+    </div>
+
+
+</template>
+<script>
+  
+  main_data.user_cli.fillUser = function(){      
+        const tbl = document.getElementById('tblUser')
+        tbl.innerHTML = ''
+        const params = new Object;
+            params.field = 'id_sistema';
+            params.signal = '=';
+            params.value = `"${document.querySelector('#cmbSis').value}" AND id_cliente = "${document.querySelector('#cmbCli').value}"`;
+        const myPromisse = queryDB(params,10);
+        myPromisse.then((resolve)=>{
+            if(resolve.trim() != ""){
+                const json = JSON.parse(resolve);
+//                document.querySelector('#tblUser').style.display = json.length > 0 ? 'block' : 'none'
+                console.log(json)
+
+/*
+                tbl.head('Cliente, Sistema')
+                for(let i=0; i<json.length;i++){
+                    tbl.plot(json[i],'cliente,sistema','Upp,Upp')
+                }
+*/                
+            }        
+        });
+    }
+
+
+    const params_cli = new Object;
+        params_cli.field = 'nome'
+        params_cli.signal = 'LIKE'
+        params_cli.value = '"%%"'        
+    fillCombo('cmbCli',params_cli,2,['id','fantasia'] )
+
+    const params_sis = new Object
+        params_sis.hash = localStorage.getItem('hash')
+    fillCombo('cmbSis',params_sis,7,['id','nome'])
+
+
+    document.querySelector('#btnBusca').addEventListener('click',()=>{
+        main_data.user_cli.fillUser()
+    })
+
+
+    document.querySelector('#tblUser').addEventListener('click',(e)=>{
+        data = e.target.parentNode.data
+        data.mode = 'edit'
+        openHTML('viewCliente.html','pop-up',data.id+"-"+data.nome,data)
+    })
+
+    document.querySelector('#btnNovo').addEventListener('click',()=>{
+        data = new Object
+        data.mode = 'novo'
+        openHTML('viewCliente.html','pop-up',"Novo Cliente",data)
+    })
+
+
+
+</script>

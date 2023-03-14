@@ -1,0 +1,65 @@
+
+<template>
+    <style>
+
+        #fdsDb{
+            display: none;
+        }
+
+
+        #btnNovoBanco{
+            width: 98%;
+        }
+
+    </style>
+
+    <div class="form-base">
+        <h1>Base de Dados</h1>
+        <fieldset id="fdsDb">
+            <legend>Bancos</legend>
+            <table id="tblDb"></table>
+        </fieldset>
+        <button id="btnNovoBanco">Nova Base de Dados</button>    
+        
+    </div>
+
+
+</template>
+<script>
+  
+    main_data.bancodados.fillDb = function(){      
+        const tbl = document.getElementById('tblDb')
+        tbl.innerHTML = ''
+        const params = new Object;
+            params.field = 'id_sistema';
+            params.signal = '>=';
+            params.value = '"0"';
+        const myPromisse = queryDB(params,10);
+        myPromisse.then((resolve)=>{
+            if(resolve.trim() != ""){
+                const json = JSON.parse(resolve);
+                document.querySelector('#fdsDb').style.display = json.length > 0 ? 'block' : 'none'
+                tbl.head('Cliente, Sistema')
+                for(let i=0; i<json.length;i++){
+                    tbl.plot(json[i],'cliente,sistema','Upp,Upp')
+                }
+            }        
+        });
+    }
+
+    main_data.bancodados.fillDb()
+
+    document.querySelector('#tblDb').addEventListener('click',(e)=>{
+        data = e.target.parentNode.data
+        data.mode = 'edit'
+        openHTML('viewBanco.html','pop-up','Editar Base de Dados',data)
+    })
+
+
+    document.querySelector('#btnNovoBanco').addEventListener('click',()=>{
+        const data = new Object
+        data.mode = 'new'
+        openHTML('viewBanco.html','pop-up','Nova Base de Dados',data)
+    })
+
+</script>

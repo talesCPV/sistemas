@@ -1,0 +1,63 @@
+
+<template>
+    <style>
+
+        #fdsSis{
+            display: none;
+        }
+
+
+        #btnNovoSistema{
+            width: 98%;
+        }
+
+    </style>
+
+    <div class="form-base">
+        <h1>Registro de Sistemas</h1>
+        <fieldset id="fdsSis">
+            <legend>Sistemas</legend>
+            <table id="tblSis"></table>
+        </fieldset>
+        <button id="btnNovoSistema">Novo Sistema</button>    
+        
+    </div>
+
+
+</template>
+<script>
+  
+    main_data.sistemas.fillSis = function(){      
+        const tbl = document.getElementById('tblSis')
+        tbl.innerHTML = ''
+        const params = new Object;
+            params.hash = localStorage.getItem('hash');
+        const myPromisse = queryDB(params,7);
+        myPromisse.then((resolve)=>{
+            if(resolve.trim() != ""){
+                const json = JSON.parse(resolve);
+                document.querySelector('#fdsSis').style.display = json.length > 0 ? 'block' : 'none'
+                tbl.head('Nome,Descrição')
+                for(let i=0; i<json.length;i++){
+                    tbl.plot(json[i],'nome,descri','Upp,str')
+                }
+            }        
+        });
+    }
+
+    main_data.sistemas.fillSis()
+
+    document.querySelector('#tblSis').addEventListener('click',(e)=>{
+        data = e.target.parentNode.data
+        data.mode = 'edit'
+        openHTML('viewSistema.html','pop-up','Editar Sistema',data)
+    })
+
+
+    document.querySelector('#btnNovoSistema').addEventListener('click',()=>{
+        const data = new Object
+        data.mode = 'new'
+        openHTML('viewSistema.html','pop-up','Novo Sistema',data)
+    })
+
+</script>
