@@ -33,6 +33,52 @@
     font-family: 'flexFont', Fallback, sans-serif;
   }
 
+/* FORM */
+
+  form{
+    display: flex;
+    flex-direction: column;
+  }
+
+  form > input{
+    border: none;
+    border-bottom: solid 1px;
+    margin-bottom: 15px;
+    font-size: large;
+  }
+
+  form > button{
+    margin-top: 15px;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+/* WHATSAPP*/
+
+  #whatsapp{
+    display: block;
+    position: fixed;
+    top: 2vh;
+    left: 5vw;
+    z-index: 2;
+    transition-property: right , bottom;
+    transition-duration: 3s;
+  }
+
+  #whatsapp img{
+    width: 80px; 
+    height: 80px;
+    transition-property: height, width;
+    transition-duration: 0.5s;
+  }
+
+  #whatsapp img:hover{
+    width: 100px;
+    height: 100px;
+  }
+
+/* CLASSES */
+
   .top{
     margin-top: 10px;
     display: flex;
@@ -44,10 +90,63 @@
   }
 
   .board{
-    background-color: white;
     z-index: 1;
   }
 
+  .board h1{
+    width: 100%;
+    text-align: center;
+    font-size: 2.5em;
+    margin: 20px 0;
+  }
+
+  .board p{
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+  }
+
+  ul{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+  }
+
+  ul *{
+    padding: 5px;
+  }
+
+  .white{
+    background-color: rgb(255, 255, 255);
+    padding: 20px !important;
+  }
+
+  .gray{    
+    background-color: rgb(61, 61, 61);
+    color: rgb(245, 243, 243);
+    padding: 20px !important;
+  }
+
+  .pic-label{
+    width: 100%;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 5em;
+  }
+
+  .logo{
+/*    position: relative;*/
+    display: flex;
+    padding-bottom: 100px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    top: -120px;
+    left: 20px;
+  }
 
   .scr-main{
     display: flex;
@@ -60,76 +159,165 @@
 
   .scr-child{
     width: 100%;
-    min-height: 800px;
 /*    margin: 10px;*/
-    padding: 10px;
+    padding: 150px 10px;
     /*border: solid 1px black;*/
   }
 
+  #map{
+    width:auto;
+  }
+
+
+  .pic{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
   
-  #ch_01{
+  .pic button{
+    padding: 10px;
+  }
+
+  #pic_01{ /* Cobertura do Finger */
+    background-image: url('assets/images/img01.jpg');
+  }
+
+  #pic_02{ /* Elevação de Piso Baixo */
     background-image: url('assets/images/f4.jpeg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: 100%;
-    height: 100%;
   }
 
-  #ch_03{
-    background-image: url('assets/images/elev03.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: 100%;
-    height: 100%;
+  #pic_03{ /* Gangways */
+    background-image: url('assets/images/gw03.jpg');
   }
 
+  #pic_04{ /* Projetos Especiais */
+    background-image: url('assets/images/pe01.jpg');
+  }
 
 
 </style>
 </head>
 <body>
 
-  <div class="top">
-    <img src="assets/images/logo.png" alt="">
+  <div id="whatsapp">
+    <a href="https://api.whatsapp.com/send?phone=551236532230" target="_blank" rel="noopener noreferrer"> 
+      <img src="assets/images/whatsapp.png">
+    </a>
   </div>
 
   <div class="scr-main">
-    <div id="ch_01" class="scr-child">
+    <div class="scr-child white board">
+      <div class="logo">
+        <img src="assets/images/logo.png">
+      </div>
+      <p>Nossa empresa é especializada no projeto, fabricação e instalação de gangways de alta qualidade para várias indústrias. Nossos gangways são usados para fornecer acesso seguro e fácil a diferentes tipos de estruturas, acesso a aeronave, vagões de trens e metrôs, ônibus articulados e plantas industriais.</p>
+      <p>Nós entendemos que a segurança é fundamental quando se trata de gangways, por isso usamos apenas materiais e técnicas de construção de alta qualidade para garantir que nossos gangways atendam aos mais rigorosos padrões de segurança. Nossos gangways são feitos de materiais duráveis como alumínio, aço inoxidável, tecido de PVC ou Hypalon, e são projetadas para resistir a ambientes severos e uso intenso.</p>
+      <p>Nossos gangways vêm em uma variedade de configurações para atender às necessidades específicas de nossos clientes. Oferecemos gangways fixos e retráteis, além de  várias seções para acomodar mudanças entre níveis. Também podemos personalizar peças de acordo com requisitos específicos, como comprimento, largura e capacidade de peso.</p>
+      <p>Orgulhamo-nos de nossa capacidade de fornecer excelente atendimento ao cliente e suporte durante todo o processo, desde o projeto inicial até a instalação e manutenção. Nossa equipe de profissionais experientes está dedicada a garantir que nossos clientes recebam o mais alto nível de serviço e qualidade.</p>
+      <p>Seja qual for sua necessidade, seja em finger de embarque, trens, metrôs, ou plantas industriais, temos a experiência e a expertise para fornecer uma solução que atenda às suas necessidades específicas. Entre em contato conosco hoje mesmo para saber mais sobre nossos produtos e serviços.</p>
     </div>
-    <div id="ch_02" class="scr-child board">
-      <h1>Flexibus Sanfonados LTDA.</h1>
-      <p>Empresa 100% nacional, fundada em 1994 pelo sr. Jacy Dantas a fim de iniciar um processo de manutenção até então inédito no mercado nacional, atendendo uma necessidade cada vez maior das empresas de ônibus auxiliando-as  na manutenção dos seus carros articulados.</p>
-      <h2>Nossa Política</h2>
-      <p>Resolver todo problema de nosso cliente relacionado a toda parte de articulação e sanfonados, no menor tempo possível, com a melhor qualidade e praticando um preço justo</p>
+    <div id="pic_01" class="scr-child pic">
+      <h1 class="pic-label">Sanfonas de Ônibus</h1>
+      <button>mais</button>
+    </div>
+    <div class="scr-child white board">
+      <p>Desde 1994 oferecemos serviços de manutenção e reparo de sanfonas de ônibus articulados. Nossa equipe altamente qualificada é capaz de fornecer serviços de manutenção preventiva e corretiva para garantir que suas sanfonas operem sempre em perfeito estado. Realizamos manutenções em todos os componentes da sanfona, como troca de chão, proteção interna além de melhorias como elevação de piso baixo.
+        Nossa prioridade é fornecer soluções de alta qualidade para nossos clientes, garantindo que seus ônibus possam operar com segurança e eficiência. Nosso compromisso com o cliente garante que apenas usamos materiais de alta qualidade e técnicas avançadas de fabricação e manutenção para nossos produtos.        
+        Se você estiver procurando por serviços de manutenção de sanfonas para ônibus articulados ou estiver interessado em adquirir novas sanfonas de alta qualidade, entre em contato conosco para obter mais informações sobre nossos produtos e serviços. Estamos comprometidos em fornecer soluções personalizadas e de alta qualidade para nossos clientes.</p>
+    </div>
+    <div id="pic_02" class="scr-child pic">
+      <h1 class="pic-label">Cobertura do Fole do Finger</h1>
+    </div>
+    <div class="scr-child white board">
+      <p>Após algum tempo de uso, alguns modelos de ponte começam a apresentar infiltração de água no teto do fole, desenvolvemos um teto sanfonado que é instaladdo sobre a sanfona original solucionando completamente o problema de infiltração</p>
+    </div>
+    <div id="pic_03" class="scr-child pic">
+      <h1 class="pic-label">Gangways de Trem e Metrô</h1>
+    </div>
+    <div class="scr-child white board">
+      <p>Somos especializados em manutenção corretiva de rail gangways, revitalizando e renovando a vida útil</p>
+    </div>
+    <div id="pic_04" class="scr-child pic">
+      <h1 class="pic-label">Projetos Especiais</h1>
+    </div>
+    <div class="scr-child white board">
+      <p>Projetamos e fabricamos peças de cobertura articulada conforme nescessidade e demanda do cliente</p>
+    </div>
+    <div class="scr-child gray board">
+      <h1>Contato</h1>            
+        <ul>
+          <a href="https://api.whatsapp.com/send?phone=551236532230" target="_blank" rel="noopener noreferrer">  
+            <h3 style="color: rgb(255, 230, 0);">
+              <img src="assets/images/whatsapp.png" width="30" height="30">  (12) 3653-2230 
+            </h3>          
+          </a>
+        </ul>
+        <ul>
+          <h2>Bruno José Mathias</h2>
+          <li>Representante Comercial</li>
+          <li>comercial@flexibus.com.br</li>
+          <a href="https://api.whatsapp.com/send?phone=5512991202360" target="_blank" rel="noopener noreferrer">
+            <li style="color: rgb(255, 230, 0);">(12)9.9120-2360 </li>
+          </a>
+        </ul>              
 
+        <ul>
+          <h2>Tânia Morgado</h2>
+          <li>Supervisão</li>
+          <li>tania@flexibus.com.br</li>
+          <a href="https://api.whatsapp.com/send?phone=5512997991867" target="_blank" rel="noopener noreferrer">
+            <li style="color: rgb(255, 230, 0);">(12)9.9799-1867</li>
+          </a>
+        </ul>          
+        
+        <ul> 
+          <h2>Tales Cembraneli Dantas</h2>
+          <li>Engenheiro de Manutenção e Projeto</li>
+          <li>tales@flexibus.com.br</li>
+          <a href="https://api.whatsapp.com/send?phone=5512997113793" target="_blank" rel="noopener noreferrer">
+          <li style="color: rgb(255, 230, 0);">(12)9.9711-3793</li>
+          </a>
+        </ul>
+        <ul>
+        <div id="map">					
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3669.9354400106486!2d-45.687477954352595!3d-23.09945906289206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc5159ecb89903%3A0xf0d6fd106c75a36f!2sR.+Dr.+Rosalvo+de+Almeida+Teles%2C+2070+-+Parque+Res.+Nova+Ca%C3%A7apava%2C+Ca%C3%A7apava+-+SP!5e0!3m2!1spt-BR!2sbr!4v1526665336097"
+            width="600" 
+            height="450"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen>
+          </iframe>					
+        </div>
+        <p>Nossa empresa se localiza na Av.Dr Rosalvo de Almeida Telles, 2070, Marginal da Dutra sentido Rio, Caçapava-SP CEP 12.283-020 - tel (12)3653-2230</p>
+      </ul>
     </div>
-    <div id="ch_03" class="scr-child">
-      <h1>Articulação</h1>
-    </div>
-    <div id="ch_04" class="scr-child">
-      <h1>Fole do Finger de Embarque</h1>
-    </div>
-    <div id="ch_05" class="scr-child">
-      <h1>Gangways de Metrô e Trens</h1>
-    </div>
-    <div id="ch_06" class="scr-child">
-      <h1>Projetos Especiais</h1>
-    </div>
-    <div id="ch_07" class="scr-child">
-      <h1>Peças</h1>
-    </div>
-    <div id="ch_08" class="scr-child">
-      <h1>Tintas</h1>
-    </div>
-    <div id="ch_09" class="scr-child">
-      <h1>Contato</h1>
-    </div>
-    <div id="ch_10" class="scr-child">
+
+
+    <div class="scr-child white board">
       <h1>Fale Conosco</h1>
+      <form name="frmFaleConosco" action="ajax/sendMail.php" method="POST">
+        <label>Nome</label>
+        <input type="text" name="nome" id="edtNome">
+        <label>Email</label>
+        <input type="email" name="remetente" id="edtRem">
+        <label>Assunto</label>
+        <input type="text" name="assunto" id="edtAss">
+        <textarea name="corpo" cols="30" rows="10" id="edtCorpo"></textarea>
+        <button id="btnEnviar">Enviar</button>
+      </form>
     </div>
 
+    <div class="scr-child gray board">
+      <p>Flexibus Sanfonados LTDA. | Av. Dr. Rosalvo de Almeida Telles 2070 - Caçapava-SP | (12)3653-2230 comercial@flexibus.com.br</p>
+    </div>
 
 
   </div>
